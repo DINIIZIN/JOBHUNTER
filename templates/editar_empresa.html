@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Editar empresa {% endblock %}
+
+{% block content %}
+    <h2>Editar empresa</h2>
+
+        <form method="post">
+            
+            <label>Nome da empresa</label><br>
+            <input type="text" name = "nome" value = "{{empresa.name}}"><br><br>
+            
+            <label>Setor</label><br>
+            <input type = "text" name ="setor" value = "{{empresa.setor}}">
+
+            <label>Status</label><br><br>
+            <select name = "status">
+                <option value = "Mapeada" {% if empresa.status == "Mapeada" %}selected{% endif %}>Mapeada</option>
+                <option value = "Abordagem inicial" {% if empresa.status ==  "Abordagem inicial" %}selected{% endif %}>Abordagem inicial</option>
+                <option value = "Conversa ativa" {% if empresa.status == "Conversa ativa" %}selected{% endif %}>Conversa ativa</option>
+                <option value = "Follow-up" {% if empresa.status == "Follow-up" %}selected{% endif %}>Follow-up</option>
+                <option value = "Encerrada" {% if empresa.status == "Encerrada" %}selected{% endif %}>Encerrada</option>
+            </select>
+                <button type = "submit" >Salvar Alterações</button>                
+           </form>
+
+
+            <a href =  "{{url_for('empresa_detalhe', empresa_id=empresa.id)}}">Cancelar</a>
+{% endblock %}

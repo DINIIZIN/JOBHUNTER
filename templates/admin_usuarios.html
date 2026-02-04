@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Administração de Usuários {% endblock %}
+
+{% block content %}
+    <h1>Clientes</h1>
+
+<ul>
+
+{% for u in usuarios %}
+    {% if not u.is_admin %}
+    <li>
+
+    {{u.nome}} -- {{u.email}}
+    <a href="{{url_for('admin_impersonar', usuario_id=u.id)}}">Acessar dashboard</a> 
+        </li>
+        {% endif %}
+        {% endfor %}
+</ul>
+<a href="{{url_for('dashboard')}}">Voltar</a>
+{% endblock %}

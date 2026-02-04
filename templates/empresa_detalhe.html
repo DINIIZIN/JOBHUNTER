@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %} {{empresa.name}} {% endblock %}
+
+{% block content %}
+    <h1>{{empresa.name}}</h1>
+    <p><strong>setor:</strong> {{empresa.setor}}</p>
+
+    <hr>
+
+    <!-- Contatos -->
+
+    <h2>Contatos</h2>
+
+    {% if empresa.contatos|length > 0 %}
+    <ul>
+        {% for contato in contatos %}
+        <li>
+            <strong>{{contato.name}}</strong>
+        - {{contato.cargo}} ({{contato.tipo}})
+        </li>
+        {% endfor %}
+    </ul>
+    {%else%}
+    <p>Sem contatos cadastrados.</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Ações (Últimos 30 dias)</h2>
+
+    {% if acoes and acoes | length > 0 %}
+        <ul>
+            {% for acao in acoes %}
+            <li>
+                <strong>{{acao.data.strftime('%d/%m/%Y')}}</strong>
+                - {{acao.tipo}} | {{acao.descricao}}
+                
+                {% if acao.responsavel %}
+                
+                <br>
+                
+                    {% endif %}
+
+                    <br>
+
+                    <small><strong> Responsavel: </strong> {{acao.responsavel}} </small>
+                </li>
+                <br>
+                {% endfor %}
+        </ul>
+
+        {% else %}
+
+        <p>Sem ações registradas nos últimos 30 dias</p>
+        {% endif %}
+        <hr>
+
+        <h2>Ações do cliente</h2>
+        <form method="post" action="{{url_for('salvar_anotacoes_cliente', empresa_id=empresa.id)}}">
+        <textarea name = "anotacoes_cliente" rows="6" style="width:50%;"
+            placeholder="Escreva aqui...">{{empresa.anotacoes_cliente or ""}}</textarea><br><br>
+
+
+            <button type="submit">Salvar</button>
+        </form>
+        
+        
+        <br>
+
+            
+        <a href = "{{url_for('dashboard')}}">Voltar</a>
+
+        {% endblock %}

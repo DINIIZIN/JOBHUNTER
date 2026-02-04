@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} Nova ação {% endblock %}
+
+{% block content %}
+    <h2>Nova ação {{empresa.name}}</h2>
+
+    <form method="post">
+        <div>
+            <label for="descricao">Descrição (opcional)</label><br>
+            <input type = "text" id = "descricao" name = "descricao" maxlength="150" placeholder="Ex: Mandar mensagem no Linkedin">
+</div>
+        <br>
+
+        <div>
+            <label for="tipo">Ações</label><br>
+            <select name="tipo" id="tipo" required>
+            <option value="disable selected">Selecione</option>
+            <option value="Mensagem">Mensagem</option>
+            <option value="Ligação">Ligação</option>
+            <option value = "E-mail">E-mail</option>
+            <option value="Reunião">Reunião</option>
+            <option value="Follow-up">Follow-up</option>
+            <option value="Outro">Outro</option>
+
+            </select>
+        </div>
+        <br>
+        <div>
+        <label for="responsavel">Responsavel</label><br>
+        <input type="text" name="responsavel" id="responsavel" required placeholder="Ex: Stella"><br>
+        </div>
+        <br>
+
+        <div>
+            <label for="data">Data</label><br>
+            <input type="date" id="data" name="data" required><br><br>
+        </div>
+    
+        <button type = "submit">Salvar ação</button>
+        <a href="{{url_for('empresa_detalhe', empresa_id=empresa.id)}}">Cancelar</a>
+
+    </form>
+
+    {% endblock %}

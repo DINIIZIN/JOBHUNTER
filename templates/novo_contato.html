@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %} Novo contato {% endblock %}
+
+{% block content %}
+    <h1>Novo contato</h1>
+
+    <p class = "contato">Empresa: <strong> {{empresa.name}} </strong></p>
+
+    <form method = "post" action="{{url_for('novo_contato', empresa_id=empresa.id)}}">
+        
+    <input type = "text"  name = "nome" placeholder="Nome do contato"><br><br>
+    <input type = "text" name = "cargo" placeholder="Cargo">
+        <br><br>
+
+    <select name = "tipo">
+        <option value="">Tipo de contato</option>
+        <option value="RH">RH</option>
+        <option value="Gestor">Gestor</option>
+        <option value="Gerente">Gerente</option>
+        <option value ="Diretor">Diretor</option>
+    </select>
+        <button type = "submit">Salvar contato</button>
+    </form>
+    <a href="{{ url_for('empresa_detalhe', empresa_id=empresa.id) }}">Voltar</a>
+    {% endblock %}

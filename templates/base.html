@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Arquitetura de carreiras{% endblock %}</title>
+
+    <link rel = "stylesheet" href="{{url_for('static', filename = 'css/main.css')}}">
+    {% if usuario and usuario.is_admin %}
+    <a href="{{ url_for('admin_usuarios')}}">Painel ADM</a>
+    {% endif %}
+
+</head>
+<body>
+    
+<header class = "topbar">
+    <div class = "container topbar__inner">
+        <div class = "brand">
+          
+                <div class = "brand__text">
+                   
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <nav class = "topnav">
+            <a class = "topnav__link" 
+        href="{{url_for('dashboard')}}">Dashboard</a>
+            <a class = "topnav__link"
+        href ="{{url_for('perfil')}}">Perfil</a>
+            <a class = "topnav__link topnvav__link--danger" 
+            href = "{{url_for('logout')}}">Sair</a>
+         
+    </nav>
+    </div>
+    </header>
+
+    <main class = "container page">
+        {% block content %} {% endblock %}
+    </main>
+    {% block scripts %} {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Nova senha {% endblock %}
+
+{% block content %}
+
+
+    <h1>Recuperar Senha</h1>
+    <form method="post">
+        <input type="password" name = "senha" placeholder="Senha" >
+        <br><br>
+        <input type="password" name = "confirmar"  placeholder="Confirmar Senha">
+        <button> Confirmar</button>
+        <a href="login.html">Voltar/a>
+    </form>
+{% endblock %}

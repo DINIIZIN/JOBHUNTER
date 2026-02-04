@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<img src="{{url_for('static', filename='css/img/logo_dini_company.png')}}"class="logo" >
+    <h1>DiniCompany</h1>    
+    <h2>Arquitetura de carreiras</h2>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+         {% for category, msg in messages %}
+         <div class = "alert alert-{{ category }}">{{ msg }}</div>
+         {% endfor %}
+        {% endif %}
+       {% endwith %}  
+    <form method="post" action="{{url_for('login')}}"> <!--Formulario do campos email e senha/ METHOD É COMO O NAVEGADOR ENVIA A INFORMAÇAO PRO SERVIDOR -->
+        <input name = "email" type =  "email" placeholder="Email"> <!--Campo email-->
+       <br><br>
+        <input name = "senha"type = "password" placeholder="Senha"><!--Campo Senha-->
+    <br><br>
+
+    <button type = "submit">Entrar</button> <!--botao de entrar que envia os dados do 
+        usuario pra confirmar se ta certo
+        -->
+    <br><br>
+    
+    </form>
+    <a href="{{url_for('cadastro')}}">Cadastrar</a>
+    <a class = "rec" href="{{url_for('recuperar_senha')}}">Esqueci minha senha</a>
+    
+
+    {% endblock %}
