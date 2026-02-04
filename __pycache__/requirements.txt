@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+SQLAlchemy
+Werkzeug
+Flask-mail
+itsdangerous
+gunicorn
+psycopg2-binary
