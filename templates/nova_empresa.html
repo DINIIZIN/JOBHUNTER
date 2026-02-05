@@ -7,9 +7,9 @@
     <h1>Cadastrar nova empresa</h1>
 
     <form method="POST" action="{{ url_for('nova_empresa') }}">
-  <input name="nome" placeholder="Nome da empresa">
+  <input  name="nome" placeholder="Nome da empresa">
   <br><br>
-  <input name="setor" placeholder="Setor">
+  <input  name="setor" placeholder="Setor">
   <br><br>
   <input name="senioridade" placeholder="Senioridade" value="{{ usuario.senioridade or '' }}">
   <br><br>

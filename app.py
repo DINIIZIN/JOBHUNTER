@@ -348,15 +348,15 @@ def create_app():
             return render_template("nova_empresa.html", usuario=usuario)
 
     # POST pega dados do form
-        nome = (request.form.get("nome") or "").strip()
-        setor = (request.form.get("setor") or "").strip()
 
     # dados do PERFIL (do usuario)
         usuario.senioridade = (request.form.get("senioridade") or "").strip()
         usuario.cargo_alvo = (request.form.get("cargo_alvo") or "").strip()
         usuario.empresa_interesse = (request.form.get("empresa_interesse") or "").strip()
-
+        db.session.commit()
         print(request.form)
+        nome = (request.form.get("nome") or "").strip()
+        setor = (request.form.get("setor") or "").strip()
 
         if not nome or not setor:
             return render_template(
@@ -512,7 +512,7 @@ def create_app():
         
         if request.method == "GET":
             return render_template("perfil.html", usuario=usuario)  
-
+        usuario.nome = request.form.get("nome")
         usuario.objetivo = request.form.get("objetivo")
         usuario.cargo_atual = request.form.get("cargo_atual")
         usuario.empresa_atual = request.form.get("empresa_atual")
