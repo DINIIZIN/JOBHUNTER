@@ -6,14 +6,10 @@
     <h1>Perfil</h1>
 
     <form method="post" action="{{ url_for('perfil')}}" >
-
-                
-                    <br><br>   
+  
         <input name = "empresa_atual" type = "text" placeholder="Empresa atual"
                         value = "{{usuario.empresa_atual or ''}}">
                         <br><br>
-        <input name = "objetivo" type = "text" placeholder="Objetivo"
-            value = "{{ usuario.objetivo or ''}}">
         <br><br>
         <input name = "cargo_atual" type = "text" placeholder="Cargo atual"
             value = "{{usuario.cargo_atual or ''}}">

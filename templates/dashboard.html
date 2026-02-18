@@ -9,36 +9,35 @@
 {% block content %}
 <img src="{{url_for('static', filename = 'css/img/logo_dini_company.png')}}" class="logo">
     <h1>Arquitetura de Carreiras</h1>
-     <h3>Bem vindo(a)! {{usuario.nome}}</h3>
+     <h3>Bem vindo(a)!</h3>
     
     <div class = "Resumo">
         
-        <p><strong>Nome: </strong>{{usuario.nome}}</p>
+        
         <p><strong>Empresa atual: </strong>{{usuario.empresa_atual}}</p>
-        <p><strong>Objetivo: </strong>{{usuario.objetivo}}</p>
         <p><strong>Cargo atual: </strong>{{usuario.cargo_atual}}</p>
-
-      </div>
-        {% if admin and admin.is_admin %}
         
-        
-        <a href = "{{url_for('perfil')}}" >Editar perfil </a>
-        {% endif %}
     </div>
-    <hr>
+    {% if admin and admin.is_admin %}
     
     
+    <a href = "{{url_for('perfil')}}" >Editar perfil </a>
+    {% endif %}
+</div>
+<hr>
+
+
+
+
+
+<div class = "cards">
     
     
+    <h3>Mapeamento Estratégico de Momento</h3>
     
-    <div class = "cards">
-        
-        
-        <h3>Mapeamento Estratétigico de Momento</h3>
-        
-        <div class = "Mapeamento">
+    <div class = "Mapeamento">
+            <p><strong>Objetivo: </strong>{{usuario.objetivo}}</p>
             <p><strong>Empresas:</strong> {{usuario.empresa_interesse}}</p>
-            <p><strong>Cargo alvo: </strong>{{usuario.cargo_alvo}}</p>
             <p><strong>Senioridade: </strong>{{usuario.senioridade}}</p>
             <div>
                 <hr class = "linha">

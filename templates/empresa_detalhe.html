@@ -27,14 +27,14 @@
 
     <hr>
 
-    <h2>Ações (Últimos 30 dias)</h2>
+    <h2>Ações</h2>
 
     {% if acoes and acoes | length > 0 %}
         <ul>
             {% for acao in acoes %}
             <li>
                 <strong>{{acao.data.strftime('%d/%m/%Y')}}</strong>
-                - {{acao.tipo}} | {{acao.descricao}}
+                 {{acao.descricao}}
                 
                 {% if acao.responsavel %}
                 

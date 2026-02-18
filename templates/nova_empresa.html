@@ -10,10 +10,11 @@
   <input  name="nome" placeholder="Nome da empresa">
   <br><br>
   <input  name="setor" placeholder="Setor">
-  <br><br>
+  <br><br> 
+  <input name = "objetivo" type = "text" placeholder="Objetivo"
+        value = "{{ usuario.objetivo or ''}}">
+          <br><br>
   <input name="senioridade" placeholder="Senioridade" value="{{ usuario.senioridade or '' }}">
-  <br><br>
-  <input name="cargo_alvo" placeholder="Cargo alvo" value="{{ usuario.cargo_alvo or '' }}">
   <br><br>
   <input name="empresa_interesse" placeholder="Empresas de interesse" value="{{ usuario.empresa_interesse or '' }}">
 

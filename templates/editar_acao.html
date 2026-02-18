@@ -1,4 +1,4 @@
-{% extends "base.html %}
+{% extends "base.html" %}
 
 {% block title %} Editar ação {% endblock %}
 
@@ -12,8 +12,8 @@
         <input type="text" name="responsavel" value="{{ acao.responsavel }}" required><br><br>
         
 
-        <label">Data</label>
-        <input type="date" name="data" value="{{ acao.data.strftime('%Y-%m-%d') }}" required><br><br>
+        <label>Data</label>
+        <input type="date" name="data" value="{{ acao.data.strftime('%Y-%m-%d') if acao.data else ''}}" required><br><br>
 
 
         <select name="tipo" required>
