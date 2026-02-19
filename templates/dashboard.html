@@ -9,14 +9,14 @@
 {% block content %}
 <img src="{{url_for('static', filename = 'css/img/logo_dini_company.png')}}" class="logo">
     <h1>Arquitetura de Carreiras</h1>
-     <h3>Bem vindo(a)!</h3>
+     <h3>Bem vindo(a) {{usuario.nome}}!</h3>
     
     <div class = "Resumo">
         
         
         <p><strong>Empresa atual: </strong>{{usuario.empresa_atual}}</p>
         <p><strong>Cargo atual: </strong>{{usuario.cargo_atual}}</p>
-        <p><strong>Nome: </strong>{{usuario.nome}}</p>
+        
     </div>
     {% if admin and admin.is_admin %}
     
