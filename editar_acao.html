@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} Editar ação {% endblock %}
+
+{% block content %}
+<body>
+    <h2>Editar ação</h2>
+
+    <form method="POST">
+        <label>Responsavel</label><br>
+        
+        <input type="text" name="responsavel" value="{{ acao.responsavel }}" required><br><br>
+        
+
+        <label>Data</label>
+        <input type="date" name="data" value="{{ acao.data.strftime('%Y-%m-%d') if acao.data else ''}}" required><br><br>
+
+
+        <select name="tipo" required>
+            <option value="" disabled>Selecione</option>
+            <option value="Mensagem" {{ 'selected' if acao.tipo=='Mensagem' else '' }}>Mensagem</option>
+            <option value="Ligação" {{ 'selected' if acao.tipo=='Ligação' else '' }}>Ligação</option>
+            <option value="E-mail" {{ 'selected' if acao.tipo=='E-mail' else '' }}>E-mail</option>
+            <option value="Reunião" {{ 'selected' if acao.tipo=='Reunião' else '' }}>Reunião</option>
+            <option value="Follow-up" {{ 'selected' if acao.tipo=='Follow-up' else '' }}>Follow-up</option>
+            <option value="Outro" {{ 'selected' if acao.tipo=='Outro' else '' }}>Outro</option>
+        </select>
+        
+        <br><br>
+        
+        <label>Status</label><br>
+        <select name="status" required>
+            <option value="" disabled>Selecione</option>
+            <option value="Pendente" {{ 'selected' if acao.status=='Pendente' else '' }}>Pendente</option>
+            <option value="Feita" {{ 'selected' if acao.status=='Feita' else '' }}>Feita</option>
+            <option value="Cancelada" {{ 'selected' if acao.status=='Cancelada' else '' }}>Cancelada</option>
+        </select>
+        
+        <br><br>
+        <label>Descrição</label><br>
+        <input type="text" name="descricao" value="{{ acao.descricao or '' }}" required>
+        
+
+  <br><br>
+
+  <button type="submit">Salvar alterações</button>
+</form>
+    
+    <br>
+   
+      <a href="{{url_for('dashboard')}}">Cancelar</a>
+   
+
+{% endblock %}

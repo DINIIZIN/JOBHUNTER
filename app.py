@@ -16,7 +16,7 @@ mail = Mail()
 def create_app():
     app = Flask(__name__)#cria app e usa o nome do modulo para localizar templates/static
     base_dir = os.path.abspath(os.path.dirname(__file__))
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(base_dir, "database.db") #base dir pasta onde esta o app.py
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL") or "sqlite:///database.db" #base dir pasta onde esta o app.py
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False#Isso só desliga um recurso antigo que: n e necessário gasta memoria e gera warning
     app.config["SECRET_KEY"] = "Dinicompany"#login, proteção de dados
     app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=30)#caso o usuario fique 30 minutos logado porem nao usando a sessão expira
@@ -513,7 +513,6 @@ def create_app():
         if request.method == "GET":
             return render_template("perfil.html", usuario=usuario)  
         usuario.nome = request.form.get("nome")
-        usuario.objetivo = request.form.get("objetivo")
         usuario.cargo_atual = request.form.get("cargo_atual")
         usuario.empresa_atual = request.form.get("empresa_atual")
 
@@ -525,11 +524,16 @@ def create_app():
         if "usuario_id" not in session:
             return redirect(url_for("login"))
 
+        
+        uid = session.get("cliente_contexto_id") or session["usuario_id"]
+        usuario = Usuario.query.get(uid)
+        if not usuario:
+            return redirect(url_for("login"))
         usuario_id = session["usuario_id"]
 
         acao = Acao.query.filter_by(id=acao_id, usuario_id=usuario_id).first()
         if not acao:
-            return "Ação não encontrada", 404
+                flash( "Ação não encontrada"), 404
 
 
         
