@@ -16,7 +16,14 @@ mail = Mail()
 def create_app():
     app = Flask(__name__)#cria app e usa o nome do modulo para localizar templates/static
     base_dir = os.path.abspath(os.path.dirname(__file__))
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL") or "sqlite:///database.db" #base dir pasta onde esta o app.py
+    db_url = os.environ.get("DATABASE_URL")
+    
+    if db_url and db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://","postgresql", 1)
+    
+
+    app.config ["SQLALCHEMY_DATABASE_URI"] = db_url or "sqlite:///database.db"
+    app.config #base dir pasta onde esta o app.py
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False#Isso só desliga um recurso antigo que: n e necessário gasta memoria e gera warning
     app.config["SECRET_KEY"] = "Dinicompany"#login, proteção de dados
     app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=30)#caso o usuario fique 30 minutos logado porem nao usando a sessão expira
@@ -31,6 +38,8 @@ def create_app():
 
     db.init_app(app)#agora você liga o db nesse app com essas configs
     with app.app_context():
+        print("TOTAL USUARIOS", Usuario.query.count())
+        
         db.create_all()
     
    
@@ -350,11 +359,6 @@ def create_app():
     # POST pega dados do form
 
     # dados do PERFIL (do usuario)
-        usuario.senioridade = (request.form.get("senioridade") or "").strip()
-        usuario.cargo_alvo = (request.form.get("cargo_alvo") or "").strip()
-        usuario.empresa_interesse = (request.form.get("empresa_interesse") or "").strip()
-        db.session.commit()
-        print(request.form)
         nome = (request.form.get("nome") or "").strip()
         setor = (request.form.get("setor") or "").strip()
 
@@ -496,8 +500,24 @@ def create_app():
 
         return redirect(url_for("empresa_detalhe", empresa_id=empresa.id))        
         
-
-    
+    @app.route("/mapeamento", methods = ["GET","POST"])
+    def editar_mapeamento():
+        if "usuario_id" not in session:
+            return redirect(url_for("login"))
+        usuario = Usuario.query.get(session['usuario_id'])
+        uid = session.get("cliente_contexto_id") or session["usuario_id"]
+        usuario = Usuario.query.get(uid)
+        if not usuario:
+            return redirect(url_for("login"))
+        if request.method == "GET":
+            return render_template("editar_mapeamento.html", usuario=usuario)
+        usuario.senioridade = (request.form.get("senioridade") or "").strip()
+        usuario.objetivo = (request.form.get("objetivo") or "").strip()
+        usuario.empresa_interesse = (request.form.get("empresa_interesse") or "").strip()
+        db.session.commit()
+        print(request.form)
+        return redirect(url_for("dashboard"))
+       
     @app.route("/perfil", methods = ["GET", "POST"])
     def perfil():
         if "usuario_id" not in session:

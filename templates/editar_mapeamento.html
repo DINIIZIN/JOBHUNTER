@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} Mapeamento Estratégico de Momento {% endblock %}
+
+{% block content %}
+<h2>Editar mapeamento</h2>
+<form 
+    method="post" action="{{url_for('editar_mapeamento')}}">
+<input name = "objetivo" type = "text" placeholder="Objetivo"
+        value = "{{ usuario.objetivo or ''}}">
+          <br><br>
+  <input name="senioridade" placeholder="Senioridade" value="{{ usuario.senioridade or '' }}">
+  <br><br>
+  <input name="empresa_interesse" placeholder="Empresas de interesse" value="{{ usuario.empresa_interesse or '' }}">
+    <br>
+  <button type="submit">Salvar</button>
+
+
+  </form>
+   {% endblock %}

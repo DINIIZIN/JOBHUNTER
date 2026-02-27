@@ -15,7 +15,7 @@
         <label>Data</label>
         <input type="date" name="data" value="{{ acao.data.strftime('%Y-%m-%d') if acao.data else ''}}" required><br><br>
 
-
+        <label>Abordagem</label>
         <select name="tipo" required>
             <option value="" disabled>Selecione</option>
             <option value="Mensagem" {{ 'selected' if acao.tipo=='Mensagem' else '' }}>Mensagem</option>
@@ -26,15 +26,6 @@
             <option value="Outro" {{ 'selected' if acao.tipo=='Outro' else '' }}>Outro</option>
         </select>
         
-        <br><br>
-        
-        <label>Status</label><br>
-        <select name="status" required>
-            <option value="" disabled>Selecione</option>
-            <option value="Pendente" {{ 'selected' if acao.status=='Pendente' else '' }}>Pendente</option>
-            <option value="Feita" {{ 'selected' if acao.status=='Feita' else '' }}>Feita</option>
-            <option value="Cancelada" {{ 'selected' if acao.status=='Cancelada' else '' }}>Cancelada</option>
-        </select>
         
         <br><br>
         <label>Descrição</label><br>

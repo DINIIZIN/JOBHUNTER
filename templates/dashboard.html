@@ -40,6 +40,11 @@
             <p><strong>Empresas:</strong> {{usuario.empresa_interesse}}</p>
             <p><strong>Senioridade: </strong>{{usuario.senioridade}}</p>
             <div>
+            
+                <div>
+                    <a href="{{url_for('editar_mapeamento')}}">Editar Mapeamento</a>
+                </div>
+                
                 <hr class = "linha">
             </div>
             {% if admin and admin.is_admin %}
