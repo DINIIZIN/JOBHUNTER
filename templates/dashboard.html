@@ -42,7 +42,9 @@
             <div>
             
                 <div>
+                    {% if admin and admin.is_admin %}
                     <a href="{{url_for('editar_mapeamento')}}">Editar Mapeamento</a>
+                    {% endif %}
                 </div>
                 
                 <hr class = "linha">
